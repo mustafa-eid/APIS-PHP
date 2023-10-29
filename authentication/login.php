@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->execute();
         $user = $query->fetch(PDO::FETCH_ASSOC);
-        $data = ['id'=>$user['id'], 'username'=>$user['username'], 'email'=>$email, 'password'=>$password, 'token'=>$token];
-
+        
         if ($user) {
+            $data = ['id'=>$user['id'], 'username'=>$user['username'], 'email'=>$email, 'password'=>$password, 'token'=>$token];
             if ($password === $user['password']) {
                 echo json_encode(['errors' => $errors, 'message' => 'Login successfully', 'data'=>$data]);
             } else {
